@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KasirKu - Aplikasi Kasir</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <section id="login" class="login-screen">
+    <form id="loginForm" class="login-card">
+      <div class="logo">K</div><p class="eyebrow">APLIKASI KASIR</p>
+      <h1>Selamat datang</h1><p class="muted">Masuk untuk mulai mencatat transaksi.</p>
+      <label>Nama kasir</label><input id="cashierInput" placeholder="Nama kasir" required>
+      <label>PIN</label><input id="pinInput" type="password" inputmode="numeric" placeholder="PIN demo: 1234" required>
+      <button class="primary">Masuk</button><p id="loginError" class="error"></p>
+    </form>
+  </section>
+
+  <div id="app" class="app hidden">
+    <aside class="sidebar">
+      <div class="brand"><span class="logo mini">K</span> KasirKu</div>
+      <button class="nav active" data-view="cashierView">▦ &nbsp; Kasir</button>
+      <button class="nav" data-view="historyView">◷ &nbsp; Riwayat transaksi</button>
+      <div class="sidebar-bottom"><div class="cashier-info">👤 <span id="cashierName">Kasir</span></div><button id="logout" class="logout">Keluar</button></div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar"><div><p class="eyebrow">TOKO / RESTORAN</p><h1 id="heading">Transaksi penjualan</h1></div><span id="today" class="date"></span></header>
+
+      <section id="cashierView" class="view">
+        <div class="columns">
+          <section class="panel">
+            <div class="section-head"><div><h2>Daftar menu</h2><p class="muted">Pilih produk untuk masuk ke keranjang.</p></div><span id="productCount" class="pill"></span></div>
+            <input id="search" class="search" placeholder="Cari menu...">
+            <div id="products" class="products"></div>
+          </section>
+          <aside class="panel cart">
+            <div class="section-head"><div><h2>Keranjang</h2><p class="muted">Pesanan pelanggan</p></div><button id="clear" class="link danger">Kosongkan</button></div>
+            <div id="cartItems" class="cart-items"><div class="empty">🛒<b>Keranjang masih kosong</b><span>Pilih menu di sebelah kiri.</span></div></div>
+            <div class="checkout">
+              <div class="line"><span>Subtotal</span><b id="subtotal">Rp0</b></div>
+              <div class="line total"><span>Total bayar</span><b id="total">Rp0</b></div>
+              <label for="paid">Uang diterima</label><input id="paid" type="number" min="0" placeholder="Masukkan nominal">
+              <div class="line change"><span>Kembalian</span><b id="change">Rp0</b></div>
+              <button id="save" class="primary full" disabled>Simpan transaksi</button>
+              <small class="muted center">Data tersimpan di browser perangkat ini.</small>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="historyView" class="view hidden">
+        <section class="panel">
+          <div class="section-head"><div><h2>Riwayat transaksi</h2><p class="muted">Transaksi yang tersimpan pada browser ini.</p></div><button id="csv" class="secondary">Unduh CSV</button></div>
+          <div class="table-wrap"><table><thead><tr><th>No. transaksi</th><th>Tanggal</th><th>Kasir</th><th>Total</th><th>Bayar</th><th>Kembalian</th><th>Struk</th></tr></thead><tbody id="history"></tbody></table></div>
+          <div id="noHistory" class="empty">Belum ada transaksi.</div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <div id="receiptModal" class="modal hidden"><div class="receipt-card"><div class="modal-top"><b>Struk transaksi</b><button id="closeReceipt" class="close">✕</button></div><div id="receipt" class="receipt"></div><div class="receipt-actions"><button id="print" class="primary">Cetak struk</button><button id="done" class="secondary">Selesai</button></div></div></div>
+  <div id="toast" class="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
